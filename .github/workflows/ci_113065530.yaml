@@ -3,7 +3,7 @@ name: ci_113065530
 on:
   push:
     branches:
-      - "**"
+      - '**'
   pull_request:
 
 permissions:
@@ -32,15 +32,15 @@ jobs:
 
       - name: TypeScript typecheck
         run: npm run typecheck
-      
+
       - name: Prettier formatting check
         run: npm run format:check
 
       - name: Run tests with JUnit reporter
         run: |
           mkdir -p reports
-          npm test -- --reporter=default --reporter=junit --outputFile.junit=reports/vitest-junit.xml
-      
+          npx vitest run --reporter=default --reporter=junit --outputFile.junit=reports/vitest-junit.xml
+
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v5
         if: always()
@@ -48,4 +48,3 @@ jobs:
           report_paths: 'reports/vitest-junit.xml'
           detailed_summary: true
           include_passed: true
-        
